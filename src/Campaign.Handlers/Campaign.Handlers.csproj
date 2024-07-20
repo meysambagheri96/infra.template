@@ -1,0 +1,53 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<Compile Remove="Handlers\Pipelines\**" />
+		<Compile Remove="Handlers\Queries\PriceConfigs\**" />
+		<EmbeddedResource Remove="Handlers\Pipelines\**" />
+		<EmbeddedResource Remove="Handlers\Queries\PriceConfigs\**" />
+		<EntityDeploy Remove="Handlers\Pipelines\**" />
+		<EntityDeploy Remove="Handlers\Queries\PriceConfigs\**" />
+		<None Remove="Handlers\Pipelines\**" />
+		<None Remove="Handlers\Queries\PriceConfigs\**" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Extensions.Sliding" Version="1.0.14" />
+		<PackageReference Include="Infra.EFCore" Version="2.0.25" />
+		<PackageReference Include="LinqKit" Version="1.2.2" />
+		<PackageReference Include="Refit" Version="7.0.0" />
+		<PackageReference Include="Refit.HttpClientFactory" Version="7.0.0" />
+		<PackageReference Include="Refit.Newtonsoft.Json" Version="7.0.0" />
+		<PackageReference Include="Extensions.Http" Version="0.0.30" />
+
+		<PackageReference Include="Infra.Common.Decorators" Version="2.0.28" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Compile Update="Errors.Designer.cs">
+			<DesignTime>True</DesignTime>
+			<AutoGen>True</AutoGen>
+			<DependentUpon>Errors.resx</DependentUpon>
+		</Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+		<EmbeddedResource Update="Errors.resx">
+			<Generator>PublicResXFileCodeGenerator</Generator>
+			<LastGenOutput>Errors.Designer.cs</LastGenOutput>
+		</EmbeddedResource>
+	</ItemGroup>
+
+	<ItemGroup>
+		<Folder Include="EventHandlers\" />
+		<Folder Include="Handlers\Commands\" />
+		<Folder Include="Handlers\Queries\" />
+		<Folder Include="EventHandlers\" />
+	</ItemGroup>
+
+</Project>

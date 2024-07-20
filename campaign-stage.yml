@@ -1,0 +1,36 @@
+name: "campaign_stage"
+trigger:
+  branches:
+    include:
+    - master
+  paths:
+    include:
+    - src/Campaign.Api/*
+    - src/Campaign.Data/*
+    - src/Campaign.Domain/*
+    - src/Campaign.Handlers/*
+
+pool:
+  name: 'Default'
+
+variables:
+  solution: '**/*.sln'
+  buildPlatform: 'Any CPU'
+  buildConfiguration: 'Release'
+  PROJ: "src/Campaign.Api"
+  IMAGE_ID: harbor.mediananext.ir/next/campaign-api
+  RELEASE: "campaign"
+  ENV: Staging
+  NAMESPACE: "default"
+
+steps:
+- task: ShellScript@2
+  inputs:
+    scriptPath: "deploy_local.sh"
+  env:
+    PROJ_DIR: $(PROJ)
+    PUB_ENV: "Staging"
+    IMAGE_ID: $(IMAGE_ID)
+    RELEASE: $(RELEASE)
+    V: $(Build.SourceVersion)
+    NAMESPACE: $(NAMESPACE)

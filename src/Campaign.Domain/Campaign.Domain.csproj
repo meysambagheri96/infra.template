@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Infra.Events.Kafka" Version="2.0.39" />
+		<PackageReference Include="EntityFrameworkCore.SqlServer.HierarchyId" Version="3.0.1" />
+		<PackageReference Include="H.Extensions" Version="1.0.48" />
+		<PackageReference Include="DDDHelpers" Version="1.0.14" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.6" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer.NetTopologySuite" Version="6.0.6" />
+		<PackageReference Include="Microsoft.Spatial" Version="7.12.1" />
+		<PackageReference Include="System.Spatial" Version="5.8.5" />
+	</ItemGroup>
+
+</Project>
