@@ -1,6 +1,9 @@
 FROM mcr.microsoft.com/dotnet/aspnet:6.0
 EXPOSE 80 5000
 
+ENV ASPNETCORE_URLS=http://*:80
+ENV ASPNETCORE_HTTP_PORTS=80
+
 ARG TIMEZONE
 ENV TZ ${TIMEZONE}
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone

@@ -13,8 +13,10 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Campaign.Data;
-using Campaign.Handlers.Common;
 using System.IdentityModel.Tokens.Jwt;
+using System.Text.Encodings.Web;
+using Campaign.Infrastructure.Utils.Serializers.Converters;
+using Microsoft.AspNetCore.Localization;
 
 namespace Campaign.Api;
 
@@ -69,21 +71,60 @@ public static class ServiceExtensions
         });
     }
 
-    public static void InjectClasses(this IServiceCollection services)
-    {
-        services.AddScoped<ClaimHelper>();
-    }
-
     public static void AddControllersInternal(this IServiceCollection services)
     {
-        services.AddControllers(config =>
+        services
+            .AddControllers(config =>
             {
                 config.Filters.Add(typeof(ExceptionHandlerFilter));
             })
-            .AddNewtonsoftJson(); // options => options.SetCustomJsonSettings());
+            //.AddApplicationPart(typeof(Startup).Assembly) //You can include other api projects controllers here
+            .AddJsonOptions(c =>
+            {
+                c.JsonSerializerOptions.Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping;
+                c.JsonSerializerOptions.Converters.Add(new EnumDisplayNameConverterFactory());
+            });
+    }
+    
+    public static void AddHostedServicesInternal(this IServiceCollection services)
+    {
+    }
+    
+    public static void AddRefitInternal(this IServiceCollection services)
+    {
+
+    }
+    
+    public static void AddLocalizationInternal(this IServiceCollection services)
+    {
+        services.AddLocalization(opt => { opt.ResourcesPath = "Resources"; });
+
+        services.Configure<RequestLocalizationOptions>(options =>
+        {
+            var supportedCultures = new List<System.Globalization.CultureInfo>
+            {
+                new("ar"),
+                new("fa"),
+                new("en"),
+                new("tr")
+            };
+
+            options.SupportedCultures = supportedCultures;
+            options.SupportedUICultures = supportedCultures;
+            options.RequestCultureProviders = new IRequestCultureProvider[]
+            {
+                new Infrastructure.Utils.Localization.CustomRequestCultureProvider()
+            };
+        });
     }
 
-    public static void AddSwagger(this IServiceCollection services)
+    public static void AddPrometheusInternal(this IServiceCollection services)
+    {
+        services.AddSingleton<Metrics>();
+    }
+
+
+    public static void AddSwaggerInternal(this IServiceCollection services)
     {
         services.AddSwaggerGen(c =>
         {

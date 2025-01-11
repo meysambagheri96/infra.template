@@ -8,9 +8,9 @@ namespace Campaign.Api;
 
 public class Program
 {
-    public static void Main(string[] args)
+    public static async Task Main(string[] args)
     {
-        CreateHostBuilder(args).Build().Run();
+        await CreateHostBuilder(args).Build().RunAsync();
     }
 
     public static IHostBuilder CreateHostBuilder(string[] args) =>
@@ -22,9 +22,13 @@ public class Program
 
                 Guard.NotNullOrEmpty(elasticUrl, nameof(elasticUrl));
 
+                Serilog.Debugging.SelfLog.Enable(Console.Error);
+
                 config
                     .WriteTo.Elasticsearch(new ElasticsearchSinkOptions(new Uri(elasticUrl))
                     {
+                        FailureCallback = (@event, exception) => { Console.WriteLine(@event.Exception); },
+                        EmitEventFailure = EmitEventFailureHandling.RaiseCallback,
                         AutoRegisterTemplate = true,
                         IndexFormat = $"campaigns-{DateTime.UtcNow:yyyy-MM-dd}"
                     })
@@ -34,11 +38,6 @@ public class Program
             })
             .ConfigureAppConfiguration((context, config) =>
             {
-                foreach (var s in config.Sources)
-                {
-                    if (s is FileConfigurationSource)
-                        ((FileConfigurationSource)s).ReloadOnChange = false;
-                }
             })
             .ConfigureWebHostDefaults(webBuilder =>
             {

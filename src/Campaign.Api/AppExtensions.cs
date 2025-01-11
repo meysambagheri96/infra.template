@@ -1,6 +1,8 @@
 ﻿using System.Diagnostics;
 using Microsoft.Extensions.FileProviders;
+using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
+using Prometheus;
 using Swashbuckle.AspNetCore.SwaggerUI;
 
 namespace Campaign.Api;
@@ -9,7 +11,7 @@ public static class AppExtensions
 {
     public static void UseStaticFilesInternal(this IApplicationBuilder app, IConfiguration config, IWebHostEnvironment env)
     {
-        var basePath = config.GetSection("StorageConfig:basePath")?.Value;
+        var basePath = config.GetSection("StorageConfig:BasePath")?.Value;
 
         Guard.NotNullOrEmpty(basePath, nameof(basePath));
 
@@ -60,7 +62,7 @@ public static class AppExtensions
 
         app.UseSwaggerUI(c =>
         {
-            c.SwaggerEndpoint($"{prefix}/swagger/v1/swagger.json", "FronApi V1");
+            c.SwaggerEndpoint($"{prefix}/swagger/v1/swagger.json", "Campaign API V1");
             c.DocExpansion(DocExpansion.None);
         });
     }
@@ -72,6 +74,23 @@ public static class AppExtensions
             endpoints.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
+
+            endpoints.MapControllerRoute(
+                name: "areas",
+                pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+
+            endpoints.MapDefaultControllerRoute();
         });
+    }
+  
+    public static void UsePrometheusInternal(this IApplicationBuilder app)
+    {
+        app.UseMetricServer(9100);
+    }
+
+    public static void UseLocalizationInternal(this IApplicationBuilder app)
+    {
+        var localizeOptions = app.ApplicationServices.GetService<IOptions<RequestLocalizationOptions>>();
+        app.UseRequestLocalization(localizeOptions.Value);
     }
 }

@@ -1,17 +1,21 @@
 ﻿using Extensions.Http.Mvc;
 using Infra.Commands;
 using Infra.Queries;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Campaign.Api.Controllers;
 
+[ApiController]
+[Area("campaign")]
+[Route("[area]/campaigns")]
 public class CampaignController : BaseController
 {
-    private readonly ICommandProcessor _commandProcessor;
     private readonly IQueryProcessor _queryProcessor;
+    private readonly ICommandProcessor _commandProcessor;
 
-    public CampaignController(ICommandProcessor commandProcessor, IQueryProcessor queryProcessor)
+    public CampaignController(IQueryProcessor queryProcessor, ICommandProcessor commandProcessor)
     {
-        this._commandProcessor = commandProcessor;
-        this._queryProcessor = queryProcessor;
+        _queryProcessor = queryProcessor;
+        _commandProcessor = commandProcessor;
     }
 }

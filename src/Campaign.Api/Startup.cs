@@ -1,4 +1,5 @@
 using Autofac;
+using Campaign.Infrastructure.Utils.Extensions;
 using Extensions.Http.Mvc;
 
 namespace Campaign.Api;
@@ -18,12 +19,16 @@ public class Startup
         services.AddHttpContextAccessor();
         services.AddControllersInternal();
         services.AddExecutionContext();
-        services.AddSwagger();
+        services.AddSwaggerInternal();
         services.AddDbContextInternal();
-        services.InjectClasses();
         services.AddAuthInternal();
         services.AddMemoryCache();
         services.AddDistributedMemoryCache();
+        services.AddRedisMemoryCache(Configuration);
+        services.AddLocalizationInternal();
+        services.AddRefitInternal();
+        services.AddHostedServicesInternal();
+        services.AddPrometheusInternal();
     }
 
     public void ConfigureContainer(ContainerBuilder builder)
@@ -34,6 +39,10 @@ public class Startup
 
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
     {
+
+        app.UseLocalizationInternal();
+        app.UsePrometheusInternal();
+
         app.UseAuthentication();
         app.UseDeveloperExceptionPage();
         app.UseCorsInternal();
