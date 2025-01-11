@@ -1,7 +1,7 @@
 trigger:
   tags:
     include:
-      - campaign-stage*
+      - campaign-prod*
 
 pool:
   name: 'Default'
@@ -11,19 +11,19 @@ variables:
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
   PROJ: "src/Campaign.Api"
-  IMAGE_ID: scr.tasaheel.org/ota/campaign
+  IMAGE_ID: scr.HARBOR.org/ota/campaign
   RELEASE: "campaign"
-  ENV: Staging
+  ENV: Production
   
 steps:
   - task: ShellScript@2
     inputs:
       scriptPath: "deploy_local_new.sh"
     env:
-      #KUBECONFIG: "/root/.kube/do"
+      KUBECONFIG: ""
       #DOTNET_CLI_HOME: "/root"
       PROJ_DIR: $(PROJ)
-      PUB_ENV: "Staging"
+      PUB_ENV: "Production"
       IMAGE_ID: $(IMAGE_ID)
       RELEASE: $(RELEASE)
       SLN: "Campaign.sln"

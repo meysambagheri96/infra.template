@@ -1,19 +1,18 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 
-namespace Campaign.Data
-{
-    public class CampaignDbContextFactory : IDesignTimeDbContextFactory<CampaignDbContext>
-    {
-        public CampaignDbContextFactory()
-        {
-        }
+namespace Campaign.Data;
 
-        public CampaignDbContext CreateDbContext(string[] args)
-        {
-            var builder = new DbContextOptionsBuilder<CampaignDbContext>();
-            builder.UseSqlServer("****");
-            return new CampaignDbContext(builder.Options);
-        }
+public class CampaignDbContextFactory : IDesignTimeDbContextFactory<CampaignDbContext>
+{
+    public CampaignDbContextFactory()
+    {
+    }
+
+    public CampaignDbContext CreateDbContext(string[] args)
+    {
+        var builder = new DbContextOptionsBuilder<CampaignDbContext>();
+        builder.UseSqlServer("****");
+        return new CampaignDbContext(builder.Options);
     }
 }

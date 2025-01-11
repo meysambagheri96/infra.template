@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="Utils\.NET\CustomHttpLogger\CustomLoggingConstants.cs" />
+    <Compile Include="Utils\.NET\CustomHttpLogger\CustomLoggingHttpMessageHandlerBuilderFilter.cs" />
+    <Compile Include="Utils\.NET\CustomHttpLogger\CustomLoggingScopeHttpMessageHandler.cs" />
+    <Compile Include="Utils\.NET\CustomHttpLogger\CustomLoggingServiceExtenstion.cs" />
+    <Compile Include="Utils\.NET\DependencyInjection\ModuleFactory.cs" />
+    <Compile Include="Utils\.NET\DependencyInjection\ServiceCollectionModule.cs" />
+    <Compile Include="Utils\.NET\LifeTimeScopeRunner\LifetimeScopeRunnerBackgroundService.cs" />
+    <Compile Include="Utils\.NET\LifeTimeScopeRunner\LifetimeScopeRunnerServiceExtension.cs" />
+  </ItemGroup>
+
+</Project>

@@ -13,7 +13,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Campaign.Domain", "src\Camp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Campaign.Handlers", "src\Campaign.Handlers\Campaign.Handlers.csproj", "{0B26A003-22D3-41FF-81F6-78985C84C2A1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Campaign.Integration", "src\Campaign.Integration\Campaign.Integration.csproj", "{684E194D-BFE0-4E30-8C70-A2D3B437B8F8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Campaign.Integration", "src\Campaign.Integration\Campaign.Integration.csproj", "{684E194D-BFE0-4E30-8C70-A2D3B437B8F8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Campaign.Infrastructure", "src\Campaign.Infrastructure\Campaign.Infrastructure.csproj", "{3AAF9BC2-65BA-4463-8C56-323323EADB7C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,9 +43,16 @@ Global
 		{684E194D-BFE0-4E30-8C70-A2D3B437B8F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{684E194D-BFE0-4E30-8C70-A2D3B437B8F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{684E194D-BFE0-4E30-8C70-A2D3B437B8F8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3AAF9BC2-65BA-4463-8C56-323323EADB7C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3AAF9BC2-65BA-4463-8C56-323323EADB7C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3AAF9BC2-65BA-4463-8C56-323323EADB7C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3AAF9BC2-65BA-4463-8C56-323323EADB7C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{3AAF9BC2-65BA-4463-8C56-323323EADB7C} = {2447C004-A71D-478C-BEEB-0D4CCB32E0B7}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9D2DA742-956C-40B0-A132-136DEE8D3FE1}

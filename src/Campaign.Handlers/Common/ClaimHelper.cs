@@ -1,23 +1,22 @@
 ﻿using System.Security.Claims;
 using Microsoft.AspNetCore.Http;
 
-namespace Campaign.Handlers.Common
-{
-    public class ClaimHelper
-    {
-        private readonly ClaimsPrincipal _user;
-        public ClaimHelper(IHttpContextAccessor httpContextAccessor)
-        {
-            _user = httpContextAccessor.HttpContext?.User;
-        }
+namespace Campaign.Handlers.Common;
 
-        public int CurrentUserId
+public class ClaimHelper
+{
+    private readonly ClaimsPrincipal _user;
+    public ClaimHelper(IHttpContextAccessor httpContextAccessor)
+    {
+        _user = httpContextAccessor.HttpContext?.User;
+    }
+
+    public int CurrentUserId
+    {
+        get
         {
-            get
-            {
-                var userId = _user?.FindFirst(ClaimTypes.Sid);
-                return userId is null ? 0 : int.Parse(userId.Value);
-            }
+            var userId = _user?.FindFirst(ClaimTypes.Sid);
+            return userId is null ? 0 : int.Parse(userId.Value);
         }
     }
 }
