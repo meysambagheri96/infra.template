@@ -1,7 +1,7 @@
 ﻿# Infra.Template
 
 ## Overview
-This repo is a template microservice project for Infra.NET Framework [Infra.NET](https://github.com/HassanHashemi/infra)
+This repo is a template microservice project for Infra.NET infrastructure framework [Infra.NET](https://github.com/HassanHashemi/infra)
 
 ## Project Structure
 Here is the hierarchical structure of the project:
